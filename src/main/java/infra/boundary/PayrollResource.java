@@ -1,5 +1,6 @@
 package infra.boundary;
 
+import domain.Accountant;
 import domain.Employee;
 import domain.Payroll;
 import domain.services.EmployeeService;
@@ -16,6 +17,9 @@ import java.util.List;
 public class PayrollResource {
 
     @Inject
+    private Accountant accountant;
+
+    @Inject
     private EmployeeService employeeService;
 
 
@@ -23,7 +27,7 @@ public class PayrollResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPayroll() {
         List<Employee> employees = employeeService.fetchEmpoyees();
-        Payroll payroll = new Payroll(employees);
+        Payroll payroll = accountant.getPayroll(employees);
         return Response.ok(payroll).build();
     }
 }

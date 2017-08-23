@@ -1,5 +1,6 @@
 package infra.boundary;
 
+import domain.Accountant;
 import domain.Employee;
 import domain.Payroll;
 import domain.services.EmployeeService;
@@ -13,12 +14,17 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PayrollResourceTest {
+
+    @Mock
+    private Accountant accountant;
 
     @Mock
     private EmployeeService employeeService;
@@ -34,12 +40,10 @@ public class PayrollResourceTest {
 
     @Test
     public void getPayrollShouldReturnOkAndPayrollWithListOfEmployees() throws Exception {
-        when(employeeService.fetchEmpoyees()).thenReturn(Arrays.asList(
-                new Employee(),
-                new Employee(),
-                new Employee(),
-                new Employee()
-        ));
+        List<Employee> rawEmployees = Arrays.asList(new Employee(), new Employee(), new Employee());
+        Payroll expectedPayroll = new Payroll(rawEmployees);
+        when(employeeService.fetchEmpoyees()).thenReturn(rawEmployees);
+        when(accountant.getPayroll(rawEmployees)).thenReturn(expectedPayroll);
 
         Response response = payrollResource.getPayroll();
         Payroll payroll = (Payroll) response.getEntity();
