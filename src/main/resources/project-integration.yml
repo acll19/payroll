@@ -1,0 +1,6 @@
+swarm:
+  port:
+    offset: 1
+employees:
+ service:
+   target: http://ubuntu-ssh:8080
