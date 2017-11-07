@@ -1,0 +1,6 @@
+swarm:
+  port:
+    offset: 2
+employees:
+  service:
+    target: http://localhost:8080
