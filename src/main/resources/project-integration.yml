@@ -3,4 +3,4 @@ swarm:
     offset: 1
 employees:
  service:
-   target: http://ubuntu-ssh:8080
+   target: http://integration-server:8080

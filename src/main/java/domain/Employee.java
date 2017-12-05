@@ -7,9 +7,14 @@ public class Employee {
     private static final int THERTINTH_BASE = 13 / 100;
 
     private BigDecimal sallary;
+    private String name;
 
     public BigDecimal getSallary() {
         return sallary;
+    }
+
+    public String getName() {
+        return name;
     }
 
     void calculateSallary(double baseSallary) {

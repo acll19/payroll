@@ -29,8 +29,10 @@ public class EmployeeService {
     }
 
     public List<Employee> fetchEmpoyees() {
-        target.path("/employees");
-        Employee[] employees = target.request().accept(MediaType.APPLICATION_JSON).get(Employee[].class);
+        Employee[] employees = target.path("/employees")
+                .request()
+                .accept(MediaType.APPLICATION_JSON)
+                .get(Employee[].class);
         return Arrays.asList(employees);
     }
 }
