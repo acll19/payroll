@@ -3,4 +3,4 @@ swarm:
     offset: 1
 employees:
  service:
-   target: http://integration-server:8080
+   target: http://integration-server_em:8080
